@@ -1,4 +1,4 @@
-package com.example.receiptservice.service.impl;
+package com.example.receiptservice.service;
 
 import com.example.receiptservice.dto.DrugCreateDto;
 import com.example.receiptservice.dto.DrugDto;

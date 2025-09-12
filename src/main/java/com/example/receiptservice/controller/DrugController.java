@@ -3,7 +3,7 @@ package com.example.receiptservice.controller;
 import com.example.receiptservice.dto.DrugCreateDto;
 import com.example.receiptservice.dto.DrugDto;
 import com.example.receiptservice.dto.DrugUpdateDto;
-import com.example.receiptservice.service.impl.DrugService;
+import com.example.receiptservice.service.DrugService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

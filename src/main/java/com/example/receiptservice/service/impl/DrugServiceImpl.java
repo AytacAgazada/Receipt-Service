@@ -1,11 +1,11 @@
-package com.example.receiptservice.service;
+package com.example.receiptservice.service.impl;
 
 import com.example.receiptservice.dto.DrugCreateDto;
 import com.example.receiptservice.dto.DrugDto;
 import com.example.receiptservice.dto.DrugUpdateDto;
 import com.example.receiptservice.entity.Drug;
 import com.example.receiptservice.repository.DrugRepository;
-import com.example.receiptservice.service.impl.DrugService;
+import com.example.receiptservice.service.DrugService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
