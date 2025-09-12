@@ -3,7 +3,7 @@ package com.example.receiptservice.controller;
 import com.example.receiptservice.dto.DrugCreateDto;
 import com.example.receiptservice.dto.DrugDto;
 import com.example.receiptservice.dto.DrugUpdateDto;
-import com.example.receiptservice.service.impl.DrugServiceImpl;
+import com.example.receiptservice.service.impl.DrugService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import java.util.List;
 @RequestMapping("/api/drugs")
 public class DrugController {
 
-    private final DrugServiceImpl drugService;
+    private final DrugService drugService;
 
-    public DrugController(DrugServiceImpl drugService) {
+    public DrugController(DrugService drugService) {
         this.drugService = drugService;
     }
 

@@ -6,7 +6,7 @@ import com.example.receiptservice.dto.DrugUpdateDto;
 
 import java.util.List;
 
-public interface DrugServiceImpl {
+public interface DrugService {
     DrugDto createDrug(DrugCreateDto drugCreateDto);
     DrugDto getDrugById(Long id);
     List<DrugDto> getAllDrugs();

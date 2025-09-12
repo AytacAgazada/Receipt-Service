@@ -5,11 +5,10 @@ import com.example.receiptservice.dto.DrugDto;
 import com.example.receiptservice.dto.DrugUpdateDto;
 import com.example.receiptservice.entity.Drug;
 import com.example.receiptservice.repository.DrugRepository;
-import com.example.receiptservice.service.impl.DrugServiceImpl;
+import com.example.receiptservice.service.impl.DrugService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class DrugService implements DrugServiceImpl {
+public class DrugServiceImpl implements DrugService {
 
     private final DrugRepository drugRepository;
 
