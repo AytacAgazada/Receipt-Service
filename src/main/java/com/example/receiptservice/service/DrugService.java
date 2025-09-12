@@ -7,6 +7,7 @@ import com.example.receiptservice.entity.Drug;
 import com.example.receiptservice.repository.DrugRepository;
 import com.example.receiptservice.service.impl.DrugServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,37 +16,46 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DrugService implements DrugServiceImpl {
 
     private final DrugRepository drugRepository;
 
     @Override
     public DrugDto createDrug(DrugCreateDto drugCreateDto) {
+        log.info("Creating drug with details: {}", drugCreateDto);
         Drug drug = new Drug();
         drug.setTrade_name(drugCreateDto.getTradeName());
         drug.setIsControlledSubstance(drugCreateDto.getIsControlledSubstance());
         drug.setRequiresPrescription(drugCreateDto.getRequiresPrescription());
         drug.setIsActive(true);
         Drug savedDrug = drugRepository.save(drug);
+        log.info("Saved drug with id: {}", savedDrug.getId());
         return convertToDto(savedDrug);
     }
 
     @Override
     public DrugDto getDrugById(Long id) {
+        log.info("Fetching drug with id: {}", id);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
+        log.info("Found drug: {}", drug);
         return convertToDto(drug);
     }
 
     @Override
     public List<DrugDto> getAllDrugs() {
-        return drugRepository.findAll().stream()
+        log.info("Fetching all drugs");
+        List<Drug> drugs = drugRepository.findAll();
+        log.info("Found {} drugs", drugs.size());
+        return drugs.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public DrugDto updateDrug(Long id, DrugUpdateDto drugUpdateDto) {
+        log.info("Updating drug with id: {} and details: {}", id, drugUpdateDto);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
 
@@ -63,14 +73,17 @@ public class DrugService implements DrugServiceImpl {
         }
 
         Drug updatedDrug = drugRepository.save(drug);
+        log.info("Updated drug with id: {}", updatedDrug.getId());
         return convertToDto(updatedDrug);
     }
 
     @Override
     public void deleteDrug(Long id) {
+        log.info("Deleting drug with id: {}", id);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
         drugRepository.delete(drug);
+        log.info("Deleted drug with id: {}", id);
     }
 
     private DrugDto convertToDto(Drug drug) {
