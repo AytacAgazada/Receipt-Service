@@ -19,12 +19,12 @@ import java.util.UUID;
 public class Drug {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UuidGenerator
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(name = "trade_name", nullable = false, length = 255)
-    private String trade_name;
+    private String tradeName;
 
     @Column(name = "is_controlled_substance", nullable = false)
     private Boolean isControlledSubstance = false;
