@@ -2,6 +2,8 @@ package com.example.receiptservice.service.impl;
 
 import com.example.receiptservice.dto.ReceiptItemCreateDto;
 import com.example.receiptservice.dto.ReceiptItemDto;
+import com.example.receiptservice.entity.Drug;
+import com.example.receiptservice.entity.Receipt;
 import com.example.receiptservice.entity.ReceiptItem;
 import com.example.receiptservice.repository.DrugRepository;
 import com.example.receiptservice.repository.ReceiptItemRepository;
@@ -26,15 +28,14 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
     @Override
     public ReceiptItemDto createReceiptItem(ReceiptItemCreateDto createDto) {
         log.info("Creating new receipt item with data: {}", createDto);
-        // Ensure the referenced receipt and drug exist
-        receiptRepository.findById(createDto.getReceiptId())
+        Receipt receipt = receiptRepository.findById(createDto.getReceiptId())
                 .orElseThrow(() -> new RuntimeException("Receipt not found with id: " + createDto.getReceiptId()));
-        drugRepository.findById(createDto.getDrugId())
+        Drug drug = drugRepository.findById(createDto.getDrugId())
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + createDto.getDrugId()));
 
         ReceiptItem receiptItem = new ReceiptItem();
-        receiptItem.setReceiptId(createDto.getReceiptId());
-        receiptItem.setDrugId(createDto.getDrugId());
+        receiptItem.setReceipt(receipt);
+        receiptItem.setDrug(drug);
         receiptItem.setQuantity(createDto.getQuantity());
         receiptItem.setDosage(createDto.getDosage());
         receiptItem.setInstructions(createDto.getInstructions());
@@ -75,13 +76,13 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
                     return new RuntimeException("Receipt item not found with id: " + id);
                 });
 
-        receiptRepository.findById(receiptItemDto.getReceiptId())
+        Receipt receipt = receiptRepository.findById(receiptItemDto.getReceiptId())
                 .orElseThrow(() -> new RuntimeException("Receipt not found with id: " + receiptItemDto.getReceiptId()));
-        drugRepository.findById(receiptItemDto.getDrugId())
+        Drug drug = drugRepository.findById(receiptItemDto.getDrugId())
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + receiptItemDto.getDrugId()));
 
-        item.setReceiptId(receiptItemDto.getReceiptId());
-        item.setDrugId(receiptItemDto.getDrugId());
+        item.setReceipt(receipt);
+        item.setDrug(drug);
         item.setQuantity(receiptItemDto.getQuantity());
         item.setDosage(receiptItemDto.getDosage());
         item.setInstructions(receiptItemDto.getInstructions());
@@ -105,8 +106,8 @@ public class ReceiptItemServiceImpl implements ReceiptItemService {
     private ReceiptItemDto convertToDto(ReceiptItem item) {
         ReceiptItemDto dto = new ReceiptItemDto();
         dto.setId(item.getId());
-        dto.setReceiptId(item.getReceiptId());
-        dto.setDrugId(item.getDrugId());
+        dto.setReceiptId(item.getReceipt().getId());
+        dto.setDrugId(item.getDrug().getId());
         dto.setQuantity(item.getQuantity());
         dto.setDosage(item.getDosage());
         dto.setInstructions(item.getInstructions());

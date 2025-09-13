@@ -27,11 +27,13 @@ public class ReceiptItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "receipt_id", nullable = false)
-    private Long receiptId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receipt_id")
+    private Receipt receipt;
 
-    @Column(name = "drug_id", nullable = false)
-    private Long drugId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "drug_id")
+    private Drug drug;
 
     @Column(name = "dosage", nullable = false, length = 255)
     private String dosage;
