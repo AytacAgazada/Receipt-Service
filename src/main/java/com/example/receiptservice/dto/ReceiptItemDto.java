@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import java.time.Instant;
 public class ReceiptItemDto {
     private Long id;
     private Long receiptId;
-    private Long drugId;
+    private UUID drugId;
     private String dosage;
     private Integer quantity;
     private String instructions;

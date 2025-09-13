@@ -5,11 +5,12 @@ import com.example.receiptservice.dto.DrugDto;
 import com.example.receiptservice.dto.DrugUpdateDto;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface DrugService {
     DrugDto createDrug(DrugCreateDto drugCreateDto);
-    DrugDto getDrugById(Long id);
+    DrugDto getDrugById(UUID id);
     List<DrugDto> getAllDrugs();
-    DrugDto updateDrug(Long id, DrugUpdateDto drugUpdateDto);
-    void deleteDrug(Long id);
+    DrugDto updateDrug(UUID id, DrugUpdateDto drugUpdateDto);
+    void deleteDrug(UUID id);
 }

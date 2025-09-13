@@ -34,7 +34,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public DrugDto getDrugById(Long id) {
+    public DrugDto getDrugById(UUID id) {
         log.info("Fetching drug with id: {}", id);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
@@ -53,7 +53,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public DrugDto updateDrug(Long id, DrugUpdateDto drugUpdateDto) {
+    public DrugDto updateDrug(UUID id, DrugUpdateDto drugUpdateDto) {
         log.info("Updating drug with id: {} and details: {}", id, drugUpdateDto);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
@@ -77,7 +77,7 @@ public class DrugServiceImpl implements DrugService {
     }
 
     @Override
-    public void deleteDrug(Long id) {
+    public void deleteDrug(UUID id) {
         log.info("Deleting drug with id: {}", id);
         Drug drug = drugRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));

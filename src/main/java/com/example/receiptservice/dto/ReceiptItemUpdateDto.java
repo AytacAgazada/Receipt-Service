@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ReceiptItemUpdateDto {
     private Long receiptId;
-    private Long drugId;
+    private UUID drugId;
     private String dosage;
 
     @Min(value = 1, message = "Quantity must be at least 1")

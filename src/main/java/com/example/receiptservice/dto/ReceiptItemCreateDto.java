@@ -17,7 +17,7 @@ public class ReceiptItemCreateDto {
     private Long receiptId;
 
     @NotNull(message = "Drug ID cannot be null")
-    private Long drugId;
+    private UUID drugId;
 
     @NotBlank(message = "Dosage cannot be blank")
     private String dosage;

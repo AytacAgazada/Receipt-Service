@@ -3,15 +3,7 @@ package com.example.receiptservice.service.impl;
 import com.example.receiptservice.dto.ReceiptCreateDto;
 import com.example.receiptservice.dto.ReceiptDto;
 import com.example.receiptservice.dto.ReceiptUpdateDto;
-import com.example.receiptservice.entity.Citizen;
-import com.example.receiptservice.entity.Doctor;
-import com.example.receiptservice.entity.Hospital;
-import com.example.receiptservice.entity.Pharmacy;
 import com.example.receiptservice.entity.Receipt;
-import com.example.receiptservice.repository.CitizenRepository;
-import com.example.receiptservice.repository.DoctorRepository;
-import com.example.receiptservice.repository.HospitalRepository;
-import com.example.receiptservice.repository.PharmacyRepository;
 import com.example.receiptservice.repository.ReceiptRepository;
 import com.example.receiptservice.service.ReceiptService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +19,6 @@ import java.util.stream.Collectors;
 public class ReceiptServiceImpl implements ReceiptService {
 
     private final ReceiptRepository receiptRepository;
-    private final CitizenRepository citizenRepository;
-    private final DoctorRepository doctorRepository;
-    private final HospitalRepository hospitalRepository;
-    private final PharmacyRepository pharmacyRepository;
 
     @Override
     public ReceiptDto createReceipt(ReceiptCreateDto receiptCreateDto) {
@@ -39,16 +27,9 @@ public class ReceiptServiceImpl implements ReceiptService {
         
         // Map from ReceiptCreateDto to Receipt entity
         receipt.setSerialNumber(receiptCreateDto.getSerialNumber());
-        Citizen citizen = citizenRepository.findById(receiptCreateDto.getCitizenId())
-                .orElseThrow(() -> new RuntimeException("Citizen not found"));
-        Doctor doctor = doctorRepository.findById(receiptCreateDto.getDoctorId())
-                .orElseThrow(() -> new RuntimeException("Doctor not found"));
-        Hospital hospital = hospitalRepository.findById(receiptCreateDto.getHospitalId())
-                .orElseThrow(() -> new RuntimeException("Hospital not found"));
-
-        receipt.setCitizen(citizen);
-        receipt.setDoctor(doctor);
-        receipt.setHospital(hospital);
+        receipt.setCitizenId(receiptCreateDto.getCitizenId());
+        receipt.setDoctorId(receiptCreateDto.getDoctorId());
+        receipt.setHospitalId(receiptCreateDto.getHospitalId());
         receipt.setStatus(receiptCreateDto.getStatus());
         receipt.setFundingSource(receiptCreateDto.getFundingSource());
         receipt.setQrCodePayload(receiptCreateDto.getQrCodePayload());
@@ -95,24 +76,16 @@ public class ReceiptServiceImpl implements ReceiptService {
             receipt.setSerialNumber(receiptUpdateDto.getSerialNumber());
         }
         if (receiptUpdateDto.getCitizenId() != null) {
-            Citizen citizen = citizenRepository.findById(receiptUpdateDto.getCitizenId())
-                    .orElseThrow(() -> new RuntimeException("Citizen not found"));
-            receipt.setCitizen(citizen);
+            receipt.setCitizenId(receiptUpdateDto.getCitizenId());
         }
         if (receiptUpdateDto.getDoctorId() != null) {
-            Doctor doctor = doctorRepository.findById(receiptUpdateDto.getDoctorId())
-                    .orElseThrow(() -> new RuntimeException("Doctor not found"));
-            receipt.setDoctor(doctor);
+            receipt.setDoctorId(receiptUpdateDto.getDoctorId());
         }
         if (receiptUpdateDto.getHospitalId() != null) {
-            Hospital hospital = hospitalRepository.findById(receiptUpdateDto.getHospitalId())
-                    .orElseThrow(() -> new RuntimeException("Hospital not found"));
-            receipt.setHospital(hospital);
+            receipt.setHospitalId(receiptUpdateDto.getHospitalId());
         }
         if (receiptUpdateDto.getFulfilledByPharmacyId() != null) {
-            Pharmacy pharmacy = pharmacyRepository.findById(receiptUpdateDto.getFulfilledByPharmacyId())
-                    .orElseThrow(() -> new RuntimeException("Pharmacy not found"));
-            receipt.setFulfilledByPharmacy(pharmacy);
+            receipt.setFulfilledByPharmacyId(receiptUpdateDto.getFulfilledByPharmacyId());
         }
 
         Receipt updatedReceipt = receiptRepository.save(receipt);
@@ -134,12 +107,10 @@ public class ReceiptServiceImpl implements ReceiptService {
     private ReceiptDto convertToDto(Receipt receipt) {
         ReceiptDto dto = new ReceiptDto();
         dto.setId(receipt.getId());
-        dto.setCitizenId(receipt.getCitizen().getId());
-        dto.setDoctorId(receipt.getDoctor().getId());
-        dto.setHospitalId(receipt.getHospital().getId());
-        if (receipt.getFulfilledByPharmacy() != null) {
-            dto.setFulfilledByPharmacyId(receipt.getFulfilledByPharmacy().getId());
-        }
+        dto.setCitizenId(receipt.getCitizenId());
+        dto.setDoctorId(receipt.getDoctorId());
+        dto.setHospitalId(receipt.getHospitalId());
+        dto.setFulfilledByPharmacyId(receipt.getFulfilledByPharmacyId());
         return dto;
     }
 }

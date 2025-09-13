@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -32,7 +34,7 @@ public class DrugController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DrugDto> getDrugById(@PathVariable Long id) {
+    public ResponseEntity<DrugDto> getDrugById(@PathVariable UUID id) {
         log.info("getDrugById request received for id: {}", id);
         DrugDto drugDto = drugService.getDrugById(id);
         log.info("getDrugById response: {}", drugDto);
@@ -48,7 +50,7 @@ public class DrugController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DrugDto> updateDrug(@PathVariable Long id, @Valid @RequestBody DrugUpdateDto drugUpdateDto) {
+    public ResponseEntity<DrugDto> updateDrug(@PathVariable UUID id, @Valid @RequestBody DrugUpdateDto drugUpdateDto) {
         log.info("updateDrug request received for id: {}: {}", id, drugUpdateDto);
         DrugDto updatedDrug = drugService.updateDrug(id, drugUpdateDto);
         log.info("updateDrug response: {}", updatedDrug);
@@ -56,7 +58,7 @@ public class DrugController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDrug(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDrug(@PathVariable UUID id) {
         log.info("deleteDrug request received for id: {}", id);
         drugService.deleteDrug(id);
         log.info("deleteDrug successful for id: {}", id);

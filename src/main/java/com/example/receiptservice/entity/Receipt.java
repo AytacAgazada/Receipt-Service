@@ -25,17 +25,14 @@ public class Receipt {
     @Column(name = "serial_number", unique = true, nullable = false, length = 20)
     private String serialNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "citizen_id")
-    private Citizen citizen;
+    @Column(name = "citizen_id", nullable = false)
+    private Long citizenId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @Column(name = "doctor_id", nullable = false)
+    private Long doctorId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hospital_id")
-    private Hospital hospital;
+    @Column(name = "hospital_id", nullable = false)
+    private Long hospitalId;
 
     @OneToMany(
             mappedBy = "receipt",
@@ -61,9 +58,8 @@ public class Receipt {
     @Column(name = "fulfilled_at")
     private Instant fulfilledAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fulfilled_by_pharmacy_id")
-    private Pharmacy fulfilledByPharmacy;
+    @Column(name = "fulfilled_by_pharmacy_id")
+    private Long fulfilledByPharmacyId;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
