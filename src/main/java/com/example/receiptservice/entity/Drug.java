@@ -27,6 +27,7 @@ public class Drug {
     private String tradeName;
 
     @Column(name = "is_controlled_substance", nullable = false)
+
     private Boolean isControlledSubstance = false;
 
     @Column(name = "requires_prescription", nullable = false)
