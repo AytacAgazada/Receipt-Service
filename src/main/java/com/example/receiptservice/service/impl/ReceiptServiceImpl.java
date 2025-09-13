@@ -84,6 +84,21 @@ public class ReceiptServiceImpl implements ReceiptService {
         if (receiptUpdateDto.getHospitalId() != null) {
             receipt.setHospitalId(receiptUpdateDto.getHospitalId());
         }
+        if (receiptUpdateDto.getStatus() != null) {
+            receipt.setStatus(receiptUpdateDto.getStatus());
+        }
+        if (receiptUpdateDto.getFundingSource() != null) {
+            receipt.setFundingSource(receiptUpdateDto.getFundingSource());
+        }
+        if (receiptUpdateDto.getQrCodePayload() != null) {
+            receipt.setQrCodePayload(receiptUpdateDto.getQrCodePayload());
+        }
+        if (receiptUpdateDto.getIssueDate() != null) {
+            receipt.setIssueDate(receiptUpdateDto.getIssueDate());
+        }
+        if (receiptUpdateDto.getFulfilledAt() != null) {
+            receipt.setFulfilledAt(receiptUpdateDto.getFulfilledAt());
+        }
         if (receiptUpdateDto.getFulfilledByPharmacyId() != null) {
             receipt.setFulfilledByPharmacyId(receiptUpdateDto.getFulfilledByPharmacyId());
         }
@@ -107,10 +122,18 @@ public class ReceiptServiceImpl implements ReceiptService {
     private ReceiptDto convertToDto(Receipt receipt) {
         ReceiptDto dto = new ReceiptDto();
         dto.setId(receipt.getId());
+        dto.setSerialNumber(receipt.getSerialNumber());
         dto.setCitizenId(receipt.getCitizenId());
         dto.setDoctorId(receipt.getDoctorId());
         dto.setHospitalId(receipt.getHospitalId());
+        dto.setStatus(receipt.getStatus());
+        dto.setFundingSource(receipt.getFundingSource());
+        dto.setQrCodePayload(receipt.getQrCodePayload());
+        dto.setIssueDate(receipt.getIssueDate());
+        dto.setFulfilledAt(receipt.getFulfilledAt());
         dto.setFulfilledByPharmacyId(receipt.getFulfilledByPharmacyId());
+        dto.setCreatedAt(receipt.getCreatedAt());
+        dto.setUpdatedAt(receipt.getUpdatedAt());
         return dto;
     }
 }

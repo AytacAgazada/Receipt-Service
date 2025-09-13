@@ -19,5 +19,10 @@ public class ReceiptUpdateDto {
     private Long citizenId;
     private Long doctorId;
     private Long hospitalId;
+    private ReceiptStatus status;
+    private FundingSource fundingSource;
+    private String qrCodePayload;
+    private Instant issueDate;
+    private Instant fulfilledAt;
     private Long fulfilledByPharmacyId;
 }

@@ -14,8 +14,16 @@ import java.time.Instant;
 @NoArgsConstructor
 public class ReceiptDto {
     private Long id;
+    private String serialNumber;
     private Long citizenId;
     private Long doctorId;
     private Long hospitalId;
+    private ReceiptStatus status;
+    private FundingSource fundingSource;
+    private String qrCodePayload;
+    private Instant issueDate;
+    private Instant fulfilledAt;
     private Long fulfilledByPharmacyId;
+    private Instant createdAt;
+    private Instant updatedAt;
 }

@@ -25,7 +25,7 @@ public class DrugServiceImpl implements DrugService {
     public DrugDto createDrug(DrugCreateDto drugCreateDto) {
         log.info("Creating drug with details: {}", drugCreateDto);
         Drug drug = new Drug();
-        drug.setTrade_name(drugCreateDto.getTradeName());
+        drug.setTradeName(drugCreateDto.getTradeName());
         drug.setIsControlledSubstance(drugCreateDto.getIsControlledSubstance());
         drug.setRequiresPrescription(drugCreateDto.getRequiresPrescription());
         drug.setIsActive(true);
@@ -60,7 +60,7 @@ public class DrugServiceImpl implements DrugService {
                 .orElseThrow(() -> new RuntimeException("Drug not found with id: " + id));
 
         if (drugUpdateDto.getTradeName() != null) {
-            drug.setTrade_name(drugUpdateDto.getTradeName());
+            drug.setTradeName(drugUpdateDto.getTradeName());
         }
         if (drugUpdateDto.getIsControlledSubstance() != null) {
             drug.setIsControlledSubstance(drugUpdateDto.getIsControlledSubstance());
@@ -89,7 +89,7 @@ public class DrugServiceImpl implements DrugService {
     private DrugDto convertToDto(Drug drug) {
         DrugDto drugDto = new DrugDto();
         drugDto.setId(drug.getId());
-        drugDto.setTradeName(drug.getTrade_name());
+        drugDto.setTradeName(drug.getTradeName());
         drugDto.setIsControlledSubstance(drug.getIsControlledSubstance());
         drugDto.setRequiresPrescription(drug.getRequiresPrescription());
         drugDto.setIsActive(drug.getIsActive());

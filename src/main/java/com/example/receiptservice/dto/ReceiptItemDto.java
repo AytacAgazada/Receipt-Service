@@ -11,10 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReceiptItemDto {
-    private Long id;
+    private UUID id;
     private Long receiptId;
     private UUID drugId;
     private String dosage;
     private Integer quantity;
     private String instructions;
+    private Instant createdAt;
+    private Instant updatedAt;
 }

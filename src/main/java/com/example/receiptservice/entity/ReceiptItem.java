@@ -24,7 +24,6 @@ import java.util.UUID;
 public class ReceiptItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UuidGenerator
     private UUID id;
 

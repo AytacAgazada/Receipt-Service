@@ -3,6 +3,7 @@ package com.example.receiptservice.controller;
 
 import com.example.receiptservice.dto.ReceiptItemCreateDto;
 import com.example.receiptservice.dto.ReceiptItemDto;
+import com.example.receiptservice.dto.ReceiptItemUpdateDto;
 import com.example.receiptservice.service.ReceiptItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,9 +44,9 @@ public class ReceiptItemController {
     @PutMapping("/{id}")
     public ResponseEntity<ReceiptItemDto> updateReceiptItem(
             @PathVariable Long id,
-            @RequestBody ReceiptItemDto receiptItemDto) {
-        log.info("API request to update receipt item with id: {} data: {}", id, receiptItemDto);
-        ReceiptItemDto updatedReceiptItem = receiptItemService.updateReceiptItem(id, receiptItemDto);
+            @RequestBody ReceiptItemUpdateDto receiptItemUpdateDto) {
+        log.info("API request to update receipt item with id: {} data: {}", id, receiptItemUpdateDto);
+        ReceiptItemDto updatedReceiptItem = receiptItemService.updateReceiptItem(id, receiptItemUpdateDto);
         return ResponseEntity.ok(updatedReceiptItem);
     }
 
